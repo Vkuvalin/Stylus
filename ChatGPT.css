@@ -1,0 +1,236 @@
+
+/* ╔════════════ ИСКЛЮЧЕНИЕ: отключаем стили внутри открытых документов ════════════╗ */
+/* 🚫 Не применяем .prose и .markdown.prose внутри контейнеров документов */
+div[class*="document-content"] .prose,
+div[class*="document-content"] .markdown.prose {
+    all: unset !important;
+}
+/* ╚═════════════════════════════════════════════════════════════════════════════════╝ */
+
+
+
+
+/* ╔══════════════════════════════════════ Основная колонка с текстом  ═════════════════════════════════════╗ */
+@media (min-width: 1024px) {
+    /* Подменяем переменную max-width */
+    div[class*="--thread-content-max-width"] {
+        --thread-content-max-width: 60rem !important;
+    }
+
+    /* На всякий случай — убираем ограничения в классах */
+    .max-w-\[\-\-thread-content-max-width\] {
+        max-width: var(--thread-content-max-width) !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* Убедимся, что markdown тоже растягивается */
+    .prose,
+    .markdown.prose {
+      max-width: 100% !important;
+      box-sizing: border-box;
+      color: rgba(255, 255, 255, .9);
+    }
+    
+    
+
+
+    .markdown.prose strong:not(td strong):not(th strong):not(tr strong) {
+        text-shadow: 0 0 0.5px rgba(255, 255, 255, .7);
+        color: rgba(219, 201, 0, .6);
+    }
+
+
+    h1 {
+        color: rgba(219, 201, 0, 1);
+    }
+    h2 {
+        padding-top: 10px;
+        color: rgba(219, 201, 0, .9);
+    }
+    h3 {
+        padding-top: 10px;
+        color: rgba(219, 201, 0, .8);
+    }
+}
+/* ╚═══════════════════════════════════════════════════════════════════════════════════════════════╝ */
+
+
+/* ╔══════════════════════════════════════ ТАБЛИЦА-ФИКС  ══════════════════════════════════════╗ */
+/* 🎯 Фиксируем глючный контейнер с 90cqw */
+div.pointer-events-none.relative.left-\[50\%\].flex.w-\[100cqw\].translate-x-\[-50\%\] {
+    width: 90cqw !important;
+    max-width: 100vw !important;
+    background: rgb(33, 33, 33);
+    transform: scale(1);
+    transition: transform 0.6s ease-in-out;
+}
+
+div.pointer-events-none.relative.left-\[50\%\].flex.w-\[100cqw\].translate-x-\[-50\%\]:hover {
+    transform: scale(1.1);
+}
+
+/* ╚════════════════════════════════════════════════════════════════════════════════════════╝ */
+
+
+
+/* ╔══════════════════════════════════════ ТАБЛИЦА-СТИЛЬ  ══════════════════════════════════════╗ */
+
+/* 🔧 Немного улучшаем минимальную ширину ячеек */
+table.min-w-full td,
+table.min-w-full th {
+    min-width: 100px;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+
+
+/* Обёртка таблицы — фиксируем ширину */
+.markdown div[class*="tableWrapper"] {
+    background: #0d0d0d;
+    padding: .5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 13px 7px rgba(219, 201, 0, 0.3);
+}
+
+
+/* Новый стиль таблицы */
+div[data-message-author-role="assistant"] .markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgba(149, 255, 0, .8);
+    font-size: 14px;
+    box-shadow: 0 0 10px 20px rgba(0, 0, 0, .9);
+    border: 2px solid rgba(0, 255, 194, .3);
+    border-radius: 10px;
+}
+
+th,
+td {
+    padding-left: 10px;
+    background-color: transparent;
+    border-bottom: 1px solid #222;
+    border-right: 1px solid #00ffc233;
+}
+
+tr > th:last-child,
+tr > td:last-child {
+    border-right: none;
+}
+
+thead th {
+    background-color: #111;
+    color: rgba(219, 201, 0) !important;
+    font-weight: bold;
+    text-align: left;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 255, 200, 0.02);
+    box-shadow: inset 0 0 8px rgba(219, 201, 0, .4);
+    transition: background-color 0.2s ease-in-out;
+/*     color: rgba(219, 201, 0, 0.9) !important; */
+}
+
+
+.markdown table td:hover {
+    background-color: rgba(149, 255, 0, 0.07);
+    color: rgba(219, 201, 0, 1) !important;
+    transition: background-color 0.6s ease-in-out, color 0.1s ease-in-out;
+}
+
+.markdown table td:first-child strong,
+.markdown table td:first-child b {
+    text-shadow: 0 0 0.5px rgba(255, 255, 255, .7);
+    font-size: 15px;
+}
+
+/* Делает жирный текст менее ярким */
+.markdown table td b,
+.markdown table td strong {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+/* ╚════════════════════════════════════════════════════════════════════════════════════════════╝ */
+
+
+
+
+
+
+/* ╔══════════════════════════════════════════ ОБЩЕЕ  ═════════════════════════════════════════╗ */
+
+
+/* =================== Списки =================== */
+.markdown ul li::marker,
+.markdown ol li::marker {
+    color: rgba(219, 201, 0, .8);
+}
+
+/* 🔢 Цифры у нумерованных списков */
+.markdown ol li::marker {
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+/* ⚫ Кружки у маркированных списков */
+.markdown ul li::marker {
+    font-size: 1.1em;
+}
+
+
+/* ================== Поле ввода ================== */
+
+/* Контейнер вокруг ввода */
+form[data-type="unified-composer"] > div {
+    border: 1px solid rgba(219, 201, 0, 1) !important;
+    border-radius: 20px !important;
+}
+
+
+/* Контейнер вокруг ввода */
+form[data-type="unified-composer"] {
+    border-radius: 30px !important;
+    transition: box-shadow 0.2s ease-in-out;
+    animation: glowPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+    from {
+        box-shadow: 0 0 8px rgba(219, 201, 0, 0.5);
+    }
+    to {
+        box-shadow: 0 0 18px rgba(219, 201, 0, 0.5);
+    }
+}
+
+
+
+
+/* ================== Боковое меню ================== */
+.z-21 {
+    position: fixed !important;
+    height: 100% !important;
+}
+
+/* Возвращаем блок "Предыдущие 7 дней" в обычный поток */
+.bg-token-sidebar-surface-primary .sticky {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+}
+
+
+.bg-token-sidebar-surface-primary.pt-0 {
+    position: static !important;
+    top: auto !important;
+    z-index: auto !important;
+}
+
+/* ╚═════════════════════════════════════════════════════════════════════════════════════════╝ */
+
